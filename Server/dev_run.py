@@ -5,4 +5,4 @@ app = create_app(DevConfig)
 
 if __name__ == '__main__':
 
-    app.run(app.config['RUN_SETTING'])
+    app.run(**app.config['RUN_SETTING'])
