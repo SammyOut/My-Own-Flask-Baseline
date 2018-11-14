@@ -1,7 +1,7 @@
 import re
 from flask import request, Response
 
-from view import AccountBaseResource
+from view.base_resource import AccountBaseResource
 from model.account import AccountModel
 
 

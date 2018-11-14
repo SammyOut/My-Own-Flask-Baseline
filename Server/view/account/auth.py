@@ -2,7 +2,7 @@ from datetime import timedelta
 from flask import request, Response, jsonify
 from flask_jwt_extended import create_access_token
 
-from view import AccountBaseResource
+from view.base_resource import AccountBaseResource
 from model.account import AccountModel
 
 
