@@ -7,7 +7,7 @@ from mongoengine import connect
 from view import register
 
 
-def create_app(config):
+def create_app(config) -> Flask:
     app: Flask = Flask(__name__)
     app.config.from_object(config)
 

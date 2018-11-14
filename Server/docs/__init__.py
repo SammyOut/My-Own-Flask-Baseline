@@ -1,9 +1,9 @@
-def parameter(name, description, in_='json', type='str', required=True):
+def parameter(name: str, description: str, in_: str='json', type_: str='str', required: bool=True) -> dict:
     return {
         'name': name,
         'description': description,
         'in': in_,
-        'type': type,
+        'type': type_,
         'required': required
     }
 

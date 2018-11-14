@@ -12,7 +12,7 @@ class AuthView(AccountBaseResource):
 
     @swag_from(AUTH_POST)
     def post(self) -> Response:
-        payload = request.json
+        payload: dict = request.json
         account: AccountModel = AccountModel.objects(id=payload['id']).first()
 
         if not account or not self.check_password(account.password, payload['password']):

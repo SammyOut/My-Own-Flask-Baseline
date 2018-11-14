@@ -11,7 +11,7 @@ class SignupView(AccountBaseResource):
 
     @swag_from(SIGNUP_POST)
     def post(self) -> Response:
-        payload = request.json
+        payload: dict = request.json
 
         if AccountModel.objects(id=payload['id']).first():
             return Response('Id already exist.', 205)
@@ -26,6 +26,6 @@ class SignupView(AccountBaseResource):
         if not re.match(email_regex, payload['email']):
             return Response('Wrong email format', 205)
 
-        encrypted_password = self.encrypt_password(payload['password'])
+        encrypted_password: str = self.encrypt_password(payload['password'])
         AccountModel(id=payload['id'], password=encrypted_password, email=payload['email']).save()
         return Response('', 201)
