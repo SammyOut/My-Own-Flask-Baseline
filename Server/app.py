@@ -4,6 +4,8 @@ from flasgger import Swagger
 
 from mongoengine import connect
 
+from view import register
+
 
 def create_app(config):
     app: Flask = Flask(__name__)
@@ -12,5 +14,6 @@ def create_app(config):
     JWTManager(app)
     Swagger(app, template=app.config['SWAGGER_TEMPLATE'])
 
+    register(app)
     connect('sample')
     return app
