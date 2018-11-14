@@ -1,11 +1,11 @@
 import re
 from flask import request, Response
 
-from view import BaseResource
+from view import AccountBaseResource
 from model.account import AccountModel
 
 
-class SignupView(BaseResource):
+class SignupView(AccountBaseResource):
 
     def post(self) -> Response:
         payload = request.json
@@ -23,5 +23,6 @@ class SignupView(BaseResource):
         if not re.match(email_regex, payload['email']):
             return Response('Wrong email format', 205)
 
-        AccountModel(id=payload['id'], password=payload['password'], email=payload['email']).save()
+        encrypted_password = self.encrypt_password(payload['password'])
+        AccountModel(id=payload['id'], password=encrypted_password, email=payload['email']).save()
         return Response('', 201)
