@@ -1,5 +1,9 @@
+from os import getenv
+
+
 class Config:
-    pass
+    SECRET_KEY = getenv('SECRET_KEY', 'Nerd-Bear')
+    JSON_AS_ASCII = False
 
 
 class DevConfig(Config):

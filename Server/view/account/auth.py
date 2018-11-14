@@ -1,4 +1,6 @@
-from flask import request, Response
+from datetime import timedelta
+from flask import request, Response, jsonify
+from flask_jwt_extended import create_access_token
 
 from view import AccountBaseResource
 from model.account import AccountModel
@@ -13,4 +15,6 @@ class AuthView(AccountBaseResource):
         if not account or self.check_password(account.password, payload['password']):
             return Response('wrong account', 204)
 
-        return Response('success', 200)
+        return jsonify({
+            'accessToken': create_access_token(account.id, expires_delta=timedelta(hours=1))
+        })
