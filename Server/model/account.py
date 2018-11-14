@@ -9,9 +9,7 @@ class AccountModel(Document):
     )
 
     password = StringField(
-        required=True,
-        min_length=8,
-        max_length=32
+        required=True
     )
 
     email = StringField(

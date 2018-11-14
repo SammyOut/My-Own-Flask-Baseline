@@ -20,7 +20,7 @@ class SignupView(AccountBaseResource):
             return Response('Wrong id length', 205)
 
         if not 8 <= len(payload['password']) <= 32:
-            return Response('Wrong password length')
+            return Response('Wrong password length', 205)
 
         email_regex = '^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$'
         if not re.match(email_regex, payload['email']):

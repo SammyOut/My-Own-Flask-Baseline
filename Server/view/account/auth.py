@@ -15,7 +15,7 @@ class AuthView(AccountBaseResource):
         payload = request.json
         account: AccountModel = AccountModel.objects(id=payload['id']).first()
 
-        if not account or self.check_password(account.password, payload['password']):
+        if not account or not self.check_password(account.password, payload['password']):
             return Response('wrong account', 204)
 
         return jsonify({
