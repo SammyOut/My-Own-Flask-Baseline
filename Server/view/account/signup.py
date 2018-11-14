@@ -1,12 +1,15 @@
 import re
 from flask import request, Response
+from flasgger import swag_from
 
 from view.base_resource import AccountBaseResource
 from model.account import AccountModel
+from docs.account.signup import SIGNUP_POST
 
 
 class SignupView(AccountBaseResource):
 
+    @swag_from(SIGNUP_POST)
     def post(self) -> Response:
         payload = request.json
 

@@ -1,6 +1,6 @@
 from docs import parameter
 
-SIGNUP_POST = {
+AUTH_POST = {
     'tags': ['Account'],
     'description': '회원가입',
 
