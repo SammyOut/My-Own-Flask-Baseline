@@ -3,7 +3,6 @@ from os import getenv
 
 class Config:
     SERVICE_NAME = 'Nerdy Flask Baseline'
-
     SECRET_KEY = getenv('SECRET_KEY', 'Nerd-Bear')
     JSON_AS_ASCII = False
 
@@ -34,16 +33,9 @@ class Config:
 
 
 class DevConfig(Config):
-    RUN_SETTING = {
-        'host': '127.0.0.1',
-        'port': 5000,
-        'debug': True
-    }
+    SERVER_NAME = '127.0.0.1:5000'
+    ENV = 'development'
 
 
 class ProConfig(Config):
-    RUN_SETTING = {
-        'host': '127.0.0.1',
-        'port': 5000,
-        'debug': False
-    }
+    SERVER_NAME = '0.0.0.0:80'
