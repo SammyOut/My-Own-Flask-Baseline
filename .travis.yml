@@ -1,0 +1,15 @@
+sudo: enabled
+dist: xenial
+
+services: mongodb
+
+language: python
+
+python:
+  - "3.7"
+
+install:
+  - pip install -r requirements.txt
+
+before_script: cd Server
+script: nose2
