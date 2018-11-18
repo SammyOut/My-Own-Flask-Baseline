@@ -60,7 +60,3 @@ class TestConfig(Config):
         'host': DB_HOST,
         'port': DB_PORT
     }
-    PYMONGO_CONFIG = {
-        'host': DB_HOST,
-        'port': DB_PORT
-    }
