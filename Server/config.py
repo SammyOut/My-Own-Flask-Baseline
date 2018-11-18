@@ -31,6 +31,15 @@ class Config:
         ]
     }
 
+    DB_NAME = 'sample'
+    DB_HOST = '127.0.0.1'
+    DB_PORT = 27017
+    MONGOENGINE_CONFIG = {
+        'db': DB_NAME,
+        'host': DB_HOST,
+        'port': DB_PORT
+    }
+
 
 class DevConfig(Config):
     SERVER_NAME = '127.0.0.1:5000'
@@ -39,3 +48,19 @@ class DevConfig(Config):
 
 class ProConfig(Config):
     SERVER_NAME = '0.0.0.0:80'
+
+
+class TestConfig(Config):
+
+    DB_NAME = 'sample_sample'
+    DB_HOST = '127.0.0.1'
+    DB_PORT = 27017
+    MONGOENGINE_CONFIG = {
+        'db': DB_NAME,
+        'host': DB_HOST,
+        'port': DB_PORT
+    }
+    PYMONGO_CONFIG = {
+        'host': DB_HOST,
+        'port': DB_PORT
+    }

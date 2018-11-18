@@ -17,5 +17,5 @@ def create_app(config) -> Flask:
     Swagger(app, template=app.config['SWAGGER_TEMPLATE'])
 
     register(app)
-    connect('sample')
+    connect(**config.MONGOENGINE_CONFIG)
     return app

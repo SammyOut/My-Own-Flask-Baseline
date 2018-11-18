@@ -1,21 +1,17 @@
-from flask import Flask
 from pymongo import MongoClient
 from unittest import TestCase
 
 from app import create_app
-from config import ProConfig
+from config import TestConfig
 
 
 class TCBase(TestCase):
 
-    def __init__(self):
-        super(TestCase, self).__init__()
+    def setUp(self):
+        self.client = create_app(TestConfig).test_client()
 
-        self.client = create_app(ProConfig).test_client()
-
-        self.db_name = 'sample_test'
-        self.mongo_client = MongoClient()
-        self.db = self.mongo_client[self.db_name]
+        self.mongo_client = MongoClient(**TestConfig.PYMONGO_CONFIG)
+        self.db = self.mongo_client[TestConfig.DB_NAME]
 
     def tearDown(self):
-        self.mongo_client.drop_database(self.db_name)
+        self.mongo_client.drop_database(TestConfig.DB_NAME)
