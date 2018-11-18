@@ -1,6 +1,6 @@
 from json import dumps
 
-from tests import TCBase
+from tests import TCBase, check_status_code
 
 
 class SignupTest(TCBase):
@@ -14,42 +14,39 @@ class SignupTest(TCBase):
             content_type='application/json'
         )
 
-    def _success_signup(self, rv):
-        self.assertEqual(rv.status_code, 201)
+    @check_status_code(205)
+    def test_short_id_length(self):
+        return self.signup_request(id_='1234')
 
-    def _fail_signup(self, rv):
-        self.assertEqual(rv.status_code, 205)
+    @check_status_code(205)
+    def test_long_id_length(self):
+        return self.signup_request(id_='123456789012345678901')
 
-    def test_wrong_id_length(self):
-        rv = self.signup_request(id_='1234')
-        self._fail_signup(rv)
+    @check_status_code(205)
+    def test_short_password_length(self):
+        return self.signup_request(password='1234567')
 
-        rv = self.signup_request(id_='123456789012345678901')
-        self._fail_signup(rv)
+    @check_status_code(205)
+    def test_long_password_length(self):
+        return self.signup_request(password='123456789012345678901234567890123')
 
-    def test_wrong_password_length(self):
-        rv = self.signup_request(password='1234567')
-        self._fail_signup(rv)
+    @check_status_code(205)
+    def test_no_dot_email(self):
+        return self.signup_request(email='aaa@dsdf')
 
-        rv = self.signup_request(password='123456789012345678901234567890123')
-        self._fail_signup(rv)
+    @check_status_code(205)
+    def test_no_at_email(self):
+        return self.signup_request(email='aaadsdf.dsf')
 
-    def test_wrong_email_format(self):
-        rv = self.signup_request(email='aaa@dsdf')
-        self._fail_signup(rv)
-
-        rv = self.signup_request(email='aaadsdf,dsf')
-        self._fail_signup(rv)
-
+    @check_status_code(205)
     def test_exist_id(self):
         self.signup_request()
+        return self.signup_request(password='1234567890', email='aa@aaa.aa')
 
-        rv = self.signup_request(password='1234567890', email='aa@aaa.aa')
-        self._fail_signup(rv)
+    @check_status_code(201)
+    def test_success_min_length_id_password(self):
+        return self.signup_request()
 
-    def test_success(self):
-        rv = self.signup_request()
-        self._success_signup(rv)
-
-        rv = self.signup_request(id_='12345678901234567890', password='12345678901234567890123456789012', email='aa@aa.aa')
-        self._success_signup(rv)
+    @check_status_code(201)
+    def test_success_max_length_id_password(self):
+        return self.signup_request(id_='12345678901234567890', password='12345678901234567890123456789012', email='aa@aa.aa')
