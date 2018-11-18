@@ -1,6 +1,6 @@
 from json import dumps
 
-from tests import TCBase
+from tests import TCBase, check_status_code
 
 
 class AuthTest(TCBase):
@@ -18,20 +18,14 @@ class AuthTest(TCBase):
             content_type='application/json'
         )
 
-    def _success_signup(self, rv):
-        self.assertEqual(rv.status_code, 200)
-
-    def _fail_signup(self, rv):
-        self.assertEqual(rv.status_code, 204)
-
+    @check_status_code(204)
     def test_wront_id(self):
-        rv = self.auth_request(id='123456')
-        self._fail_signup(rv)
+        return self.auth_request(id='123456')
 
+    @check_status_code(204)
     def test_wrong_password(self):
-        rv = self.auth_request(password='1234567890')
-        self._fail_signup(rv)
+        return self.auth_request(password='1234567890')
 
+    @check_status_code(200)
     def test_success(self):
-        rv = self.auth_request()
-        self._success_signup(rv)
+        return self.auth_request()
