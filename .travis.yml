@@ -10,6 +10,13 @@ python:
 
 install:
   - pip install -r requirements.txt
+  - pip install coveralls
+  - pip install nose2
 
 before_script: cd Server
-script: nose2
+script:
+  - python -m nose2 --with-coverage
+
+after_success:
+  - coverage report
+  - coveralls

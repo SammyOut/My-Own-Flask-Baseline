@@ -5,5 +5,3 @@ flask_jwt_extended
 flasgger
 
 mongoengine
-
-nose2
