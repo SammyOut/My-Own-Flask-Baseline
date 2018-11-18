@@ -1,3 +1,4 @@
+from functools import wraps
 from json import dumps
 
 from mongoengine.connection import get_connection
@@ -24,3 +25,13 @@ class TCBase(TestCase):
             ),
             content_type='application/json'
         )
+
+
+def check_status_code(status_code):
+    def decorator(fn):
+        @wraps(fn)
+        def wrapper(self, *args, **kwargs):
+            rv = fn(self, *args, **kwargs)
+            self.assertEqual(rv.status_code, status_code)
+        return wrapper
+    return decorator
