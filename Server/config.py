@@ -2,7 +2,10 @@ from os import getenv
 
 
 class Config:
+
     SERVICE_NAME = 'Nerdy Flask Baseline'
+    SERVER_NAME = '0.0.0.0:5000'
+
     SECRET_KEY = getenv('SECRET_KEY', 'Nerd-Bear')
     JSON_AS_ASCII = False
 
@@ -45,14 +48,7 @@ class DevConfig(Config):
     SERVER_NAME = '127.0.0.1:5000'
     ENV = 'development'
 
-
-class ProConfig(Config):
-    SERVER_NAME = '0.0.0.0:80'
-
-
-class TestConfig(Config):
-
-    DB_NAME = 'sample_sample'
+    DB_NAME = 'sample_test'
     DB_HOST = '127.0.0.1'
     DB_PORT = 27017
     MONGOENGINE_CONFIG = {
