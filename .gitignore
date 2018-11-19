@@ -288,7 +288,7 @@ modules.xml
 [Ll]ocal
 [Ss]cripts
 pyvenv.cfg
-pip-selfcheck.json
+pip-selfcheck.jsosn
 
 ### VirtualEnv ###
 # Virtualenv
@@ -296,3 +296,5 @@ pip-selfcheck.json
 
 
 # End of https://www.gitignore.io/api/git,flask,python,database,virtualenv,pycharm+all
+
+*.sock
